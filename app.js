@@ -5,8 +5,12 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const cors = require("cors");
+
 var indexRouter = require("./routes/index");
 const adminRouter = require("./routes/admin");
+// conect db
+const db = require("./database/index");
+db.on("open", () => console.log("db connected"));
 
 var app = express();
 
