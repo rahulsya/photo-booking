@@ -37,6 +37,24 @@
                 width="250px"
               />
             </td>
+            <td>
+              <form
+                action="/admin/photo/<%= photos[i].id %>?_method=DELETE"
+                method="POST"
+              >
+                <button
+                  type="button"
+                  class="btn btn-warning button-update"
+                  data-toggle="modal"
+                  data-target="#modal-edit"
+                  data-id="<%= photos[i].id %>"
+                  data-title="<%= photos[i].title %>"
+                >
+                  Edit
+                </button>
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </td>
           </tr>
           <% } %>
         </tbody>
