@@ -16,6 +16,16 @@
         </div>
       </div>
     </div>
-    <%- include('add_modal.ejs') %> <%- include('../../partials/js.ejs') %>
+    <%- include('add_modal.ejs') %> <%- include('edit_modal.ejs') %> <%-
+    include('../../partials/js.ejs') %>
+    <script>
+      $("#dataTable").on("click", ".button-update", function () {
+        let id = $(this).data("id");
+        let title = $(this).data("title");
+
+        $(".title").val(title);
+        $(".id").val(id);
+      });
+    </script>
   </body>
 </html>
