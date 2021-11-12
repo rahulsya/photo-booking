@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../../partials/header.ejs') %>
+  <body id="page-top">
+    <div id="wrapper">
+      <%- include('../../partials/sidebar.ejs') %>
+      <div id="content-wrapper" class="d-flex flex-column">
+        <%- include('../../partials/navbar.ejs') %>
+        <div id="content">
+          <div class="container-fluid">
+            <h1 class="h3 mb-3 text-gray-800">Users page</h1>
+            <!-- adata here -->
+            <%- include('table_users.ejs') %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include('add_modal.ejs') %> <%- include('edit_modal.ejs') %>
+    <%-include('../../partials/js.ejs') %>
+    <script>
+      $("#dataTable").on("click", ".button-update", function () {
+        let id = $(this).data("id");
+        let name = $(this).data("name");
+        let email = $(this).data("email");
+        let role = $(this).data("role");
+        let phone_number = $(this).data("phone_number");
+        let job_title = $(this).data("job_title");
+        let address = $(this).data("address");
+
+        $(".id").val(id);
+        $(".text-name").val(name);
+        $(".email").val(email);
+        $(".role").val(role);
+        $(".phone_number").val(phone_number);
+        $(".job_title").val(job_title);
+        $(".address").val(address);
+      });
+    </script>
+  </body>
+</html>

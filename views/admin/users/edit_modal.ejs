@@ -1,0 +1,102 @@
+<div class="modal fade" id="modal-edit">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Edit user</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- end header -->
+      <!-- form  -->
+      <form action="/admin/users?_method=PUT" method="POST">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="input-name">FullName</label>
+            <input
+              type="text"
+              name="name"
+              class="form-control text-name"
+              id="input-name"
+              placeholder="your fullname"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="input-email">Email</label>
+            <input
+              type="text"
+              name="email"
+              class="form-control email"
+              id="input-email"
+              placeholder="usename@email.co.x"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="input-password">New Password</label>
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              id="input-password"
+              placeholder="password"
+            />
+          </div>
+          <div class="form-group">
+            <label for="select_roles">Roles</label>
+            <select class="form-control role" name="role" id="select_roles">
+              <option value="user">user</option>
+              <option value="admin">admin</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="input-phoneNumber">Phone Number</label>
+            <input
+              type="number"
+              name="phone_number"
+              class="form-control phone_number"
+              id="input-phoneNumber"
+              placeholder="phone number"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="input-jobTitle">Job Title</label>
+            <input
+              type="text"
+              name="job_title"
+              class="form-control job_title"
+              id="input-jobTitle"
+              placeholder="job title"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="input-address">Address</label>
+            <textarea
+              name="address"
+              class="form-control address"
+              id="input-address"
+              cols="30"
+              rows="5"
+            ></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="hidden" name="id" class="id" id="" />
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
