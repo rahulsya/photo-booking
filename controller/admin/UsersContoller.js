@@ -7,6 +7,7 @@ module.exports = {
     return res.render("admin/users/view_users", {
       title: "users",
       users,
+      user: req.session.user,
     });
   },
   addUser: async (req, res) => {

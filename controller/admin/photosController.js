@@ -4,8 +4,10 @@ const path = require("path");
 
 module.exports = {
   viewDashboard: (req, res) => {
+    console.log(req.session.user);
     return res.render("admin/dashboard/viewDashboard", {
       title: "Dashboard",
+      user: req.session.user,
     });
   },
   viewPhoto: async (req, res) => {
@@ -14,6 +16,7 @@ module.exports = {
       return res.render("admin/photos/view_photos", {
         title: "photos",
         photos,
+        user: req.session.user,
       });
     } catch (error) {
       res.redirect("/admin/photos");
@@ -57,7 +60,6 @@ module.exports = {
       if (fs.existsSync(currentImage)) {
         fs.unlinkSync(currentImage);
       }
-
       res.redirect("/admin/photos");
     } catch (error) {
       res.redirect("/admin/photos");
