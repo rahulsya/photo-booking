@@ -7,9 +7,11 @@ var logger = require("morgan");
 const cors = require("cors");
 // to allow put and delete method
 const methodOverride = require("method-override");
+const session = require("express-session");
 
 var indexRouter = require("./routes/index");
 const adminRouter = require("./routes/admin");
+const apiRouter = require("./routes/api");
 // conect db
 const db = require("./database/index");
 db.on("open", () => {
@@ -25,6 +27,15 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 // use overridemethod
 app.use(methodOverride("_method"));
+// use session
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 },
+  })
+);
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -38,6 +49,7 @@ app.use(
 
 app.use("/", indexRouter);
 app.use("/admin", adminRouter);
+app.use("/api", apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
