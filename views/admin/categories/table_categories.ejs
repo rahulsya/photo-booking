@@ -1,0 +1,67 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-toggle="modal"
+      data-target="#modal-add"
+    >
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+      >
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let i=0; i< categories.length; i++){ %>
+          <tr>
+            <td><%= i+1 %></td>
+            <td><%= categories[i].title%></td>
+            <td>
+              <img
+                src="<%= process.env.IMAGE_URL %>/<%= categories[i].image_url %>"
+                alt="photosImgs"
+                width="250px"
+              />
+            </td>
+            <td>Rp. <%= categories[i].price %></td>
+            <td>
+              <form
+                action="/admin/categories/<%= categories[i].id %>?_method=DELETE"
+                method="POST"
+              >
+                <button
+                  type="button"
+                  class="btn btn-warning button-update"
+                  data-toggle="modal"
+                  data-target="#modal-edit"
+                  data-id="<%= categories[i].id %>"
+                  data-title="<%= categories[i].title %>"
+                  data-price="<%= categories[i].price %>"
+                >
+                  Edit
+                </button>
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

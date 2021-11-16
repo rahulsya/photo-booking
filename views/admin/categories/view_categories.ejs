@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../../partials/header.ejs') %>
+  <body id="page-top">
+    <div id="wrapper">
+      <%- include('../../partials/sidebar.ejs') %>
+      <div id="content-wrapper" class="d-flex flex-column">
+        <%- include('../../partials/navbar.ejs') %>
+        <div id="content">
+          <div class="container-fluid">
+            <h1 class="h3 mb-3 text-gray-800">Categories page</h1>
+            <!-- adata here -->
+            <%- include('table_categories.ejs') %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include('add_modal.ejs') %> <%- include('edit_modal.ejs') %>
+    <%-include('../../partials/js.ejs') %>
+    <script>
+      $("#dataTable").on("click", ".button-update", function () {
+        let id = $(this).data("id");
+        let title = $(this).data("title");
+        let price = $(this).data("price");
+
+        $(".id").val(id);
+        $(".title").val(title);
+        $(".price").val(price);
+      });
+    </script>
+  </body>
+</html>
