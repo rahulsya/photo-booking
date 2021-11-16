@@ -32,7 +32,7 @@
       <!-- Outer Row -->
       <div class="row justify-content-center">
         <div class="col-xl-6 col-lg-12 col-md-9 mt-5">
-          <%- 
+          <%-
           <!-- include('./partials/message.ejs')  -->
           %>
           <div class="card o-hidden border-0 shadow-lg my-5">
@@ -44,13 +44,13 @@
                     <div class="text-center">
                       <h1 class="h4 text-gray-900 mb-4">Login</h1>
                     </div>
-                    <form class="user" action="/admin" method="get">
+                    <form class="user" action="/admin/signin" method="post">
                       <div class="form-group">
                         <input
                           type="text"
                           class="form-control form-control-user"
                           name="username"
-                          value="admin"
+                          value="rahul syaban"
                           placeholder="Enter Usernamae..."
                         />
                       </div>
@@ -60,7 +60,7 @@
                           class="form-control form-control-user"
                           id="exampleInputPassword"
                           name="password"
-                          value="rahasia"
+                          value="qwerty"
                           placeholder="Password"
                         />
                       </div>
