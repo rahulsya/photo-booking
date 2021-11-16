@@ -32,7 +32,7 @@
             <td><%= photos[i].title %></td>
             <td>
               <img
-                src="http://localhost:3008/<%= photos[i].image_url %>"
+                src="<%= process.env.IMAGE_URL %>/<%= photos[i].image_url %>"
                 alt="photosImgs"
                 width="250px"
               />
