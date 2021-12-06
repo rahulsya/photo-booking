@@ -5,6 +5,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const cors = require("cors");
+const { decodeToken } = require("./middleware/DecodeToken");
 // to allow put and delete method
 const methodOverride = require("method-override");
 const session = require("express-session");
@@ -22,6 +23,7 @@ var app = express();
 
 // cors
 app.use(cors());
+app.use(decodeToken());
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
