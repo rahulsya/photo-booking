@@ -1,0 +1,61 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-toggle="modal"
+      data-target="#modal-add"
+    >
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+      >
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Category Name</th>
+            <th>Date & time</th>
+            <th>Address</th>
+            <th>Session</th>
+            <th>Price</th>
+            <th>Payment Image</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let i=0; i< booking.length; i++){ %>
+          <tr>
+            <td><%= i+1 %></td>
+            <td><%= booking[i].user.name %></td>
+            <td><%= booking[i].category.title %></td>
+            <td class="date">
+              <% const timeFormat="ddd, mmm d yyyy, h:MM TT" %> <%=
+              dateFormat(booking[i].date_start,timeFormat) %>
+            </td>
+            <td><%= booking[i].address %></td>
+            <td><%= booking[i].session %> - session</td>
+            <td>Rp. <%= booking[i].price %></td>
+            <td>
+              <img
+                src="<%= process.env.IMAGE_URL %>/<%= booking[i].image_payment_url %>"
+                alt="photosImgs"
+                width="250px"
+              />
+            </td>
+            <td><%= booking[i].status %></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
