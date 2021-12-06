@@ -4,6 +4,7 @@ const {
   userContoller,
   categoriesContoller,
   LoginController,
+  BookingController,
 } = require("../controller");
 const multer = require("multer");
 const { uploadSingel } = require("../middleware/multer");
@@ -30,6 +31,9 @@ router.get("/categories", categoriesContoller.viewCategories);
 router.post("/categories", uploadSingel, categoriesContoller.addCategories);
 router.put("/categories", uploadSingel, categoriesContoller.editCategories);
 router.delete("/categories/:id", categoriesContoller.deleteCategories);
+
+//booking
+router.get("/booking", BookingController.viewBooking);
 
 // users
 router.get("/users", userContoller.viewUsers);
