@@ -53,11 +53,18 @@
             </td>
             <td><%= booking[i].status %></td>
             <td>
-              <a
-                href="/admin/booking/<%= booking[i].id %>"
-                class="btn btn-warning"
-                >View</a
+              <form
+                action="/admin/booking/<%= booking[i].id %>?_method=DELETE"
+                method="POST"
               >
+                <a
+                  href="/admin/booking/<%= booking[i].id %>"
+                  class="btn btn-warning"
+                  >View</a
+                >
+
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
             </td>
           </tr>
           <% } %>
