@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../../partials/header.ejs') %>
+  <body id="page-top">
+    <div id="wrapper">
+      <%- include('../../partials/sidebar.ejs') %>
+      <div id="content-wrapper" class="d-flex flex-column">
+        <%- include('../../partials/navbar.ejs') %>
+        <div id="content">
+          <div class="container-fluid">
+            <h1 class="h3 mb-3 text-gray-800">Detail Booking</h1>
+            <div class="card shadow">
+              <div class="card-body">
+                <% if (booking.status == 'success') { %>
+                <h4>Payment Status is Success</h4>
+                <%}%>
+                <div class="row">
+                  <div class="col md-4">
+                    <img
+                      src="<%= process.env.IMAGE_URL %>/<%= booking.image_payment_url %>"
+                      alt="image"
+                      style="width: 100%; display: block"
+                      class="mb-4"
+                    />
+                    <% if (booking.status == 'process') { %>
+                    <div class="row ml-1">
+                      <form
+                        action="/admin/booking/<%= booking.id%>/confirmation?_method=PUT"
+                        method="POST"
+                      >
+                        <button type="submit" href="#" class="btn btn-success">
+                          <i class="fa fa-check"></i>
+                          Confirmation
+                        </button>
+                      </form>
+                      <form
+                        action="/admin/booking/<%= booking.id%>/reject?_method=PUT"
+                        method="POST"
+                        class="ml-2"
+                      >
+                        <button type="submit" href="#" class="btn btn-danger">
+                          <i class="fa fa-times"></i>
+                          Reject
+                        </button>
+                      </form>
+                    </div>
+                    <% } %>
+                  </div>
+                  <div class="col md-8">
+                    <div class="table-responsive">
+                      <table
+                        class="table table-bordered"
+                        id="dataTableActivity"
+                        width="100%"
+                        cellspacing="0"
+                      >
+                        <tbody>
+                          <tr>
+                            <td
+                              class="font-weight-bold bg-secondary text-white"
+                            >
+                              Member Name
+                            </td>
+                            <td><%= booking.user.name %></td>
+                          </tr>
+                          <tr>
+                            <td
+                              class="font-weight-bold bg-secondary text-white"
+                            >
+                              Category Photo
+                            </td>
+                            <td><%= booking.category.title %></td>
+                          </tr>
+                          <tr>
+                            <td
+                              class="font-weight-bold bg-secondary text-white"
+                            >
+                              Address
+                            </td>
+                            <td><%= booking.address %></td>
+                          </tr>
+                          <tr>
+                            <td
+                              class="font-weight-bold bg-secondary text-white"
+                            >
+                              Session
+                            </td>
+                            <td><%= booking.session %> - session</td>
+                          </tr>
+                          <tr>
+                            <td
+                              class="font-weight-bold bg-secondary text-white"
+                            >
+                              Date
+                            </td>
+                            <td class="date">
+                              <% const timeFormat="ddd, mmm d yyyy, h:MM TT" %>
+                              <%= dateFormat(booking.date_start,timeFormat) %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td
+                              class="font-weight-bold bg-secondary text-white"
+                            >
+                              Price
+                            </td>
+                            <td>Rp. <%= booking.price %></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%-include('../../partials/js.ejs') %>
+  </body>
+</html>
