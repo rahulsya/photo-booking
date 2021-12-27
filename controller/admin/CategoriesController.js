@@ -40,7 +40,10 @@ module.exports = {
         return res.redirect("/admin/categories");
       }
 
-      await fs.unlinkSync(path.join(`public/${getCategory.image_url}`));
+      const imagePath = path.join(`public/${getCategory.image_url}`);
+      if (fs.existsSync(imagePath)) {
+        await fs.unlinkSync(imagePath);
+      }
       getCategory.title = title;
       getCategory.price = price;
       getCategory.image_url = `images/${req.file.filename}`;
@@ -57,7 +60,7 @@ module.exports = {
       const { id } = req.params;
       const category = await Category.findOneAndDelete({ _id: id });
       const imagePath = `./public/${category.image_url}`;
-      if (fs.existsSync) {
+      if (fs.existsSync(imagePath)) {
         fs.unlinkSync(imagePath);
       }
 
