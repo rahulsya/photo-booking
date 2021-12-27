@@ -1,5 +1,6 @@
 const Booking = require("../../model/Booking");
 const dateFormat = require("dateformat");
+const fs = require("fs");
 module.exports = {
   viewBooking: async (req, res) => {
     const booking = await Booking.find()
@@ -44,6 +45,20 @@ module.exports = {
       return res.redirect(`/admin/booking/${id}`);
     } catch (error) {
       return res.redirect(`/admin/booking/${id}`);
+    }
+  },
+  deleteBooking: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const booking = await Booking.findOneAndDelete({ _id: id });
+      const imagePath = `./public/${booking.image_payment_url}`;
+      if (fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath);
+      }
+
+      return res.redirect(`/admin/booking`);
+    } catch (error) {
+      return res.redirect(`/admin/booking`);
     }
   },
 };
