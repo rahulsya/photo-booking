@@ -12,6 +12,7 @@ module.exports = {
 
     try {
       const booking = await Booking.find({ user: user._id })
+        .sort({ createdAt: "desc" })
         .populate({ path: "user", select: "_id name email" })
         .populate({ path: "category", select: "_id title image_url price" });
 
@@ -28,7 +29,7 @@ module.exports = {
   },
   store: async (req, res) => {
     try {
-      const { session, address, price, category_id } = req.body;
+      const { session, address, price, category_id, date } = req.body;
       const user = req.user;
       if (!user) {
         return res.json({
@@ -47,7 +48,7 @@ module.exports = {
       const payload = {
         user: user._id,
         category: category_id,
-        date_start: new Date(),
+        date_start: date,
         session,
         address,
         price,
