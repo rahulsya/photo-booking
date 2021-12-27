@@ -8,12 +8,12 @@ module.exports = {
       const user = await User.findOne({ name: username });
 
       if (!user)
-        return res.json({
+        return res.status(401).json({
           status: "error",
           message: "account not found",
         });
       if (!bcrypt.compareSync(password, user.password)) {
-        return res.json({
+        return res.status(401).json({
           status: "error",
           message: "username or password incorrect",
         });
@@ -62,6 +62,37 @@ module.exports = {
       return res.json({
         status: "success",
         data: newUser,
+      });
+    } catch (error) {
+      return res.json({
+        status: "error",
+        messsage: error.message,
+      });
+    }
+  },
+
+  logout: async (req, res) => {
+    try {
+      let token = req.headers.authorization
+        ? req.headers.authorization.replace("Bearer ", "")
+        : null;
+
+      let user = await User.findOneAndUpdate(
+        { token: { $in: [token] } },
+        { $pull: { token } },
+        { useFindAndModify: false }
+      );
+
+      if (!token || !user) {
+        return res.status(404).json({
+          status: "error",
+          message: "user not found, token expired",
+        });
+      }
+
+      return res.json({
+        status: "success",
+        message: "Logut berhasil",
       });
     } catch (error) {
       return res.json({
