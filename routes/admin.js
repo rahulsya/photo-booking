@@ -34,6 +34,9 @@ router.delete("/categories/:id", categoriesContoller.deleteCategories);
 
 //booking
 router.get("/booking", BookingController.viewBooking);
+router.get("/booking/:id", BookingController.detailBooking);
+router.put("/booking/:id/confirmation", BookingController.confirmationBooking);
+router.put("/booking/:id/reject", BookingController.rejectBooking);
 
 // users
 router.get("/users", userContoller.viewUsers);
