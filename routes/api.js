@@ -25,6 +25,7 @@ router.get("/categories", ApiKategoriController.categories);
 
 router.post("/login", multer().none(), ApiLoginController.login);
 router.post("/register", multer().none(), ApiLoginController.register);
+router.post("/logout", multer().none(), ApiLoginController.logout);
 
 // booking
 router.get("/booking", multer().none(), ApiBookingController.allBooking);
