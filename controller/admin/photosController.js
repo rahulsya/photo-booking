@@ -1,13 +1,20 @@
 const Photo = require("../../model/Photo");
+const User = require("../../model/User");
+const Booking = require("../../model/Booking");
 const fs = require("fs");
 const path = require("path");
 
 module.exports = {
-  viewDashboard: (req, res) => {
-    console.log(req.session.user);
+  viewDashboard: async (req, res) => {
+    const dataUser = await User.find();
+    const dataBooking = await Booking.find();
+    const dataPhoto = await Photo.find();
     return res.render("admin/dashboard/viewDashboard", {
       title: "Dashboard",
       user: req.session.user,
+      totalUser: dataUser.length,
+      totalBooking: dataBooking.length,
+      totalPhoto: dataPhoto.length,
     });
   },
   viewPhoto: async (req, res) => {
@@ -41,7 +48,10 @@ module.exports = {
 
         res.redirect("/admin/photos");
       } else {
-        await fs.unlinkSync(path.join(`public/${photo.image_url}`));
+        const imagePath = path.join(`public/${photo.image_url}`);
+        if (fs.existsSync(imagePath)) {
+          await fs.unlinkSync(imagePath);
+        }
         photo.title = title;
         photo.image_url = `images/${req.file.filename}`;
         await photo.save();
