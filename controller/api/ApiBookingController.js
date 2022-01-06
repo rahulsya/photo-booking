@@ -29,7 +29,7 @@ module.exports = {
   },
   store: async (req, res) => {
     try {
-      const { session, address, price, category_id, date } = req.body;
+      const { session, address, price, category_id, date, time } = req.body;
       const user = req.user;
       if (!user) {
         return res.json({
@@ -49,6 +49,7 @@ module.exports = {
         user: user._id,
         category: category_id,
         date_start: date,
+        time_start: time,
         session,
         address,
         price,
