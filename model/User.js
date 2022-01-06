@@ -34,6 +34,27 @@ const UserSchema = Schema(
   { timestamps: true }
 );
 
+UserSchema.path("email").validate(
+  async function (value) {
+    try {
+      const count = await this.model("User").count({ email: value });
+
+      // jika user ditemukan makan akan false
+      // jika tidak ditemukan akan true
+
+      // jika false maka validasi gagal
+      // jika true maka validasi behasil
+
+      // harus di kasi true
+      return !count;
+    } catch (error) {
+      throw error;
+    }
+  },
+  // kalo false
+  (attr) => `${attr.value} sudah terdaftar`
+);
+
 const HASH_ROUND = 10;
 
 UserSchema.pre("save", function (next) {
