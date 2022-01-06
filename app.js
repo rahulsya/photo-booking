@@ -5,6 +5,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const cors = require("cors");
+const flash = require("connect-flash");
 const { decodeToken } = require("./middleware/DecodeToken");
 // to allow put and delete method
 const methodOverride = require("method-override");
@@ -39,6 +40,7 @@ app.use(
   })
 );
 
+app.use(flash());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
