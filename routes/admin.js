@@ -11,7 +11,10 @@ const { uploadSingel } = require("../middleware/multer");
 const auth = require("../middleware/auth");
 router.get("/signin", (req, res) => {
   if (!req.session.user) {
-    return res.render("index", { title: "Login" });
+    const alertMessage = req.flash("alertMessage");
+    const alertStatus = req.flash("alertStatus");
+    const alert = { message: alertMessage, status: alertStatus };
+    return res.render("index", { title: "Login", alert });
   }
   return res.redirect("/admin");
 });
@@ -34,6 +37,7 @@ router.delete("/categories/:id", categoriesContoller.deleteCategories);
 
 //booking
 router.get("/booking", BookingController.viewBooking);
+router.post("/booking", multer().none(), BookingController.filterBooking);
 router.get("/booking/:id", BookingController.detailBooking);
 router.put("/booking/:id/confirmation", BookingController.confirmationBooking);
 router.put("/booking/:id/reject", BookingController.rejectBooking);
