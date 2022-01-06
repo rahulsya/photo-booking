@@ -28,6 +28,32 @@ module.exports = {
     });
   },
 
+  filterBooking: async (req, res) => {
+    const { date1, date2 } = req.body;
+    // if (date1 === date2) {
+    //   const booking = await Booking.find({
+    //     date_start: date1,
+    //   })
+    //     .populate("user")
+    //     .populate("category");
+    //   console.log(new Date(date1));
+    //   return res.json(booking);
+    // }
+
+    const booking = await Booking.find({
+      date_start: { $gte: date1, $lte: date2 },
+    })
+      .sort({ createdAt: "desc" })
+      .populate("user")
+      .populate("category");
+    return res.render("admin/booking/view_booking", {
+      title: "Booking",
+      booking,
+      dateFormat,
+      user: req.session.user,
+    });
+  },
+
   confirmationBooking: async (req, res) => {
     try {
       const { id } = req.params;
