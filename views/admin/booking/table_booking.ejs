@@ -1,13 +1,29 @@
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <button
-      type="button"
-      class="btn btn-primary"
-      data-toggle="modal"
-      data-target="#modal-add"
-    >
-      <i class="fas fa-plus"></i>
-    </button>
+    <form class="form-inline" method="post" action="/admin/booking">
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="inputDate1" class="sr-only">Date</label>
+        <input
+          type="date"
+          class="form-control"
+          name="date1"
+          id="inputDate1"
+          required
+        />
+      </div>
+      -
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="inputDate2" class="sr-only">Date2</label>
+        <input
+          type="date"
+          class="form-control"
+          name="date2"
+          id="inputDate2"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary mb-2">View Report</button>
+    </form>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -38,8 +54,9 @@
             <td><%= booking[i].user.name %></td>
             <td><%= booking[i].category.title %></td>
             <td class="date">
-              <% const timeFormat="ddd, mmm d yyyy, h:MM TT" %> <%=
+              <% const timeFormat="ddd, mmm d yyyy," %> <%=
               dateFormat(booking[i].date_start,timeFormat) %>
+              <%=booking[i].time_start %>
             </td>
             <td><%= booking[i].address %></td>
             <td><%= booking[i].session %> - session</td>
