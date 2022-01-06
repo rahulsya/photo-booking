@@ -53,10 +53,7 @@ module.exports = {
 
   register: async (req, res) => {
     try {
-      const { password, ...data } = req.body;
-
-      const hashPassword = bcrypt.hashSync(password, 10);
-      const newUser = new User({ ...data, password: hashPassword });
+      const newUser = new User(req.body);
       await newUser.save();
 
       return res.json({
