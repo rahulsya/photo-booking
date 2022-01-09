@@ -8,12 +8,12 @@ module.exports = {
       const user = await User.findOne({ name: username });
 
       if (!user)
-        return res.status(401).json({
+        return res.json({
           status: "error",
           message: "account not found",
         });
       if (!bcrypt.compareSync(password, user.password)) {
-        return res.status(401).json({
+        return res.json({
           status: "error",
           message: "username or password incorrect",
         });
@@ -46,7 +46,7 @@ module.exports = {
     } catch (error) {
       return res.json({
         status: "error",
-        messsage: error.message,
+        message: error.message,
       });
     }
   },
@@ -63,7 +63,7 @@ module.exports = {
     } catch (error) {
       return res.json({
         status: "error",
-        messsage: error.message,
+        message: error.message,
       });
     }
   },
@@ -94,7 +94,7 @@ module.exports = {
     } catch (error) {
       return res.json({
         status: "error",
-        messsage: error.message,
+        message: error.message,
       });
     }
   },
